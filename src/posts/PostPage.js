@@ -6,11 +6,11 @@ export default class PostPage extends Component {
 		if (!data) return null;
 		return (
 			<div>
-				<p>{data.markdownRemark.frontmatter.date}</p>
-				<h1>{data.markdownRemark.frontmatter.title}</h1>
+				<p>{data.contentfulBlogPost.date}</p>
+				<h1>{data.contentfulBlogPost.title}</h1>
 				<div
 					dangerouslySetInnerHTML={{
-						__html: data.markdownRemark.html
+						__html: data.contentfulBlogPost.body.childMarkdownRemark.html
 					}}
 				/>
 			</div>
@@ -20,6 +20,15 @@ export default class PostPage extends Component {
 
 export const query = graphql`
   query BlogPostQuery($slug: String!) {
-
+		contentfulBlogPost(slug: {eq: $slug}) {
+    title
+    body {
+      childMarkdownRemark {
+        html
+      }
+    }
+    slug
+    id
+  }
   }
 `;
