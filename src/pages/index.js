@@ -8,7 +8,18 @@ const IndexPage = ({data}) => (
 		{data.allMarkdownRemark.edges.map(({node}) => (
 			<PostListing key={node.id} post={node} />
 		))}
+		<h2>Contact Form</h2>
+		<form
+			name="contact"
+			method="post"
+			data-netlify="true"
+			data-netlify-honeypot="bot-field"
+		>
+			<input name="name" placeholder="Your Name" type="text"/>
+			<button>Send</button>
+		</form>
 	</div>
+
 );
 
 
